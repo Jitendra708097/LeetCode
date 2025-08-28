@@ -7,6 +7,7 @@ const authRouter = require('./routes/userAuth');
 const problemRouter = require('./routes/problemCreator');
 const redisClient = require('./config/redis');
 const submitRouter = require('./routes/submit');
+const DsAGuruRouter = require('./routes/DsAGuru');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(cors({
 app.use('/user',authRouter);
 app.use('/problem',problemRouter);
 app.use('/submission',submitRouter);
+app.use('/ai',DsAGuruRouter);
 
 
 
