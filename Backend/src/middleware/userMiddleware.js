@@ -6,20 +6,20 @@ const userMiddleware = async(req,res,next)=>{
 
     try{
 
-        const {token} = req.cookies;
+        const { token } = req.cookies;
         if(!token)
-            throw new Error("Invalid token.");
+            throw new Error("Token is not present");
 
         const payload = jwt.verify(token,process.env.JWT_SECRET_KEY);
-        console.log(payload);
+        // console.log(payload);
         if(!payload)
             throw new Error("Error: "+error);
 
-        const {emailId} = payload;
-        if(!emailId)
-            throw new Error("Invalid token.");
+        const { _id } = payload;
+        if(!_id)
+            throw new Error("Invalid token");
 
-        const result = await user.findOne({emailId});
+        const result = await user.findById(_id);
         if(!result)
             throw new Error("User Doesn't exist.");
 
@@ -34,7 +34,7 @@ const userMiddleware = async(req,res,next)=>{
 
     }
     catch(error){
-        res.send("Error: "+error);
+        res.status(401).send("Error: "+error.message);
     }
 }
 
