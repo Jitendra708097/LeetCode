@@ -1,10 +1,27 @@
-
+import Header from "../homepage/header";
+import Hero from "../homepage/hero";
+import Features from "../homepage/features";
+import Footer from "../homepage/footer";
 
 function Homepage()
 {
     return (
     <>
-    <h1 className="bg-sky-500">Welcome on my Home Page.</h1>
+    <div>
+       <Header></Header>
+    </div>
+
+    <div>
+       <Hero></Hero>
+    </div>
+       
+    <div>
+       <Features></Features>
+    </div>
+
+    <div>
+        <Footer></Footer>
+    </div>
     </>
     )
 }

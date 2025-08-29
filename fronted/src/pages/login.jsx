@@ -2,11 +2,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useNavigate, NavLink} from 'react-router';
 import {loginUser} from "../authSlicer"
 import { useEffect } from 'react';
 
-const signupSchema = z.object({
+const loginSchema = z.object({
   emailId: z.string().email("Invalid Email"),
   password: z.string().min(8, "Password is to weak")
 });
@@ -21,7 +21,7 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(signupSchema) });
+  } = useForm({ resolver: zodResolver(loginSchema) });
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -39,8 +39,8 @@ function Login() {
         <div className="card-body">
           <h2 className="card-title justify-center text-3xl">Leetcode</h2> {/* Centered title */}
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* Existing form fields */}
-
+            
+            {/* Email Id field  */}
             <div className="form-control  mt-4">
               <label className="label mb-1">
                 <span className="label-text">Email</span>
@@ -55,7 +55,8 @@ function Login() {
                 <span className="text-error">{errors.emailId.message}</span>
               )}
             </div>
-
+            
+            {/* password field  */}
             <div className="form-control mt-4">
               <label className="label mb-1">
                 <span className="label-text">Password</span>
@@ -70,7 +71,8 @@ function Login() {
                 <span className="text-error">{errors.password.message}</span>
               )}
             </div>
-
+            
+            {/* login button  */}
             <div className="form-control mt-6 flex justify-center">
               <button
                 type="submit"
@@ -80,6 +82,15 @@ function Login() {
               </button>
             </div>
           </form>
+         
+         {/* it re-directs to the sign up page */}
+          <div className='text-center mt-4'>
+               <span className='font-bold text-sm tracking-wide'>Create an account?{' '} 
+                <NavLink to='/signup' className="link link-primary">
+                 Sign Up
+                </NavLink>
+                </span>
+          </div>
         </div>
       </div>
     </div>

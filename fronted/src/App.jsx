@@ -13,16 +13,21 @@ function App()
   const {isAuthenticated, loading,user} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  useEffect(()=>{
+  // it checks user already authenticated or not 
+  useEffect(() => {
     dispatch(checkAuth());
   },[dispatch]);
 
+  // if we not use this loading then page re-direct to Signup page then back to Homepage 
+  // if user authenticated so we use loading spinner page will not re-direct to 
+  // Signup you will see spinner till loading
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center">
       <span className="loading loading-spinner loading-lg"></span>
     </div>
   }
 
+  // here we are handling routing 
   return (
   <>
      <Routes>
